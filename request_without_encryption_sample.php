@@ -17,7 +17,7 @@ $content_to_be_sign = "POST ".$url."\n".$client_id.".".$request_time.".".$reques
 echo "content_to_be_sign = ".$content_to_be_sign."\r\n";
 
 // change where you private key file is
-$pkeyid = openssl_pkey_get_private("file:///Users/ali-240577n/go/bin/merchant.pem");
+$pkeyid = openssl_pkey_get_private("file:///absolute/path/merchant.pem");
 // use openssl sha256 to sign
 openssl_sign($content_to_be_sign, $signature, $pkeyid, OPENSSL_ALGO_SHA256);
 // free the key from memory
