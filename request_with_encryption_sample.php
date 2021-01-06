@@ -41,7 +41,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Content-Type: text/plain",
     "Client-Id: ".$client_id,
 	"Request-Time: ".$request_time,
-	"Encrypt: algorithm=RSA_AES, symmetricKey=".$encrypted_aes_key,
+	"Encrypt: algorithm=RSA_AES, keyVersion=v1, symmetricKey=".$encrypted_aes_key,
 	"Signature: algorithm=RSA256, keyVersion=v1, signature=".$url_encode_signature
 ));
 curl_setopt($ch, CURLOPT_URL, $host.$url);
