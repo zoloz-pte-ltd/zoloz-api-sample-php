@@ -17,7 +17,7 @@ $encrypted_aes_key = urlencode(base64_encode($enc));
 echo "encrypted aes key =".$encrypted_aes_key."\r\n";
 
 $request_time = date("Y-m-d\TH:i:sO");
-// $request_time = "2020-12-01T00:00:00+0800";
+// $request_time ="2020-01-01T00:00:00+0000";
 echo "request_time = ".$request_time."\r\n";
 
 // change to your client id
@@ -30,7 +30,7 @@ $content_to_be_sign = "POST ".$url."\n".$client_id.".".$request_time.".".$reques
 echo "content_to_be_sign = ".$content_to_be_sign."\r\n";
 
 // change where you private key file is
-$pkeyid = openssl_pkey_get_private("file:///absolute/path/merchant.pem");
+$pkeyid = openssl_pkey_get_private("file:///tmp/merchant.pem");
 // use openssl sha256 to sign
 openssl_sign($content_to_be_sign, $signature, $pkeyid, OPENSSL_ALGO_SHA256);
 $url_encode_signature = urlencode(base64_encode($signature));
