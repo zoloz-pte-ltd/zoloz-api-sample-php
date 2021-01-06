@@ -27,6 +27,7 @@ $url_encode_signature = urlencode(base64_encode($signature));
 echo "signature = ".$url_encode_signature."\r\n";
 
 $ch = curl_init();
+// change the keyVersion you use
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Content-Type: application/json; charset=UTF-8",
     "Client-Id: ".$client_id,
