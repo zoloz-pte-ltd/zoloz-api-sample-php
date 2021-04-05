@@ -11,7 +11,7 @@ echo "request_time = ".$request_time."\r\n";
 // change to your client id
 $client_id = "2188455383736145";
 // this is sandbox env host, for production it is https://sg-production-api.zoloz.com
-$host = "https://sg-sandbox-api.zoloz.com"; 
+$host = "https://sg-sandbox-api.zoloz.com";
 $url = "/api/v1/zoloz/authentication/test";
 
 $content_to_be_sign = "POST ".$url."\n".$client_id.".".$request_time.".".$request_body;
@@ -39,6 +39,7 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_HEADER, 1);
+curl_setopt($ch, CURLOPT_USERAGENT, "test"); // change it to your agent name, this is a mandatory header for passing our WAF.
 
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
