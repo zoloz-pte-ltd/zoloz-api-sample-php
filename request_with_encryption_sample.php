@@ -4,9 +4,9 @@ $request_body = json_encode(array("title"=>"hello", "description"=>"just for dem
 // $request_body = "{}"
 echo "request_body = ".$request_body."\r\n";
 
-$aes_key = openssl_random_pseudo_bytes(16);
+$aes_key = openssl_random_pseudo_bytes(32);
 echo "aes key base64 = ".base64_encode($aes_key)."\r\n";
-$encrypted = openssl_encrypt($request_body, "AES-128-ECB", $aes_key, OPENSSL_RAW_DATA);
+$encrypted = openssl_encrypt($request_body, "AES-256-ECB", $aes_key, OPENSSL_RAW_DATA);
 $encrypted_content = base64_encode($encrypted);
 echo "encrypted_content = ".$encrypted_content."\r\n";
 $request_body = $encrypted_content;
@@ -37,7 +37,6 @@ $url_encode_signature = urlencode(base64_encode($signature));
 echo "signature = ".$url_encode_signature."\r\n";
 
 $ch = curl_init();
-// change the keyVersion you use
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Content-Type: text/plain",
     "Client-Id: ".$client_id,
@@ -86,7 +85,7 @@ openssl_private_decrypt(base64_decode(urldecode($encrypt_aes_key)), $decrypted_a
 // free the key from memory
 openssl_free_key($pkeyid);
 echo "response aes key base64 format = ".base64_encode($decrypted_aes_key)."\r\n";
-$real_body = openssl_decrypt($response_body, "AES-128-ECB", $decrypted_aes_key);
+$real_body = openssl_decrypt($response_body, "AES-256-ECB", $decrypted_aes_key);
 echo "real body = ".$real_body."\r\n";
 
 curl_close($ch);
